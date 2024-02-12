@@ -1,0 +1,36 @@
+{
+  "name": "yasifys-tools",
+  "version": "1.5.0",
+  "description": "A website with tools to download videos from popular social media platforms.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "jest",
+    "lint": "eslint .",
+    "live": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "Tyler Github",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node": "^18.17.2",
+    "@distube/ytdl-core": "^4.13.3",
+    "dotenv": "^16.3.2",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.11.2",
+    "helmet": "^7.1.0",
+    "mongoose": "^7.5.0",
+    "node-fetch": "^2.6.12",
+    "sanitize-filename": "^1.6.3",
+    "semver": "^7.5.1",
+    "socket.io": "^4.7.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.45.0",
+    "jest": "^29.6.1",
+    "jest-sonar-reporter": "^2.0.0",
+    "sonarqube-scanner": "^3.0.1",
+    "supertest": "^6.3.3"
+  }
+}

@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>DATAVERSE Downloader - Baixe Videos do Youtube no Formato MP4!</title>
+  <meta name="description"
+    content="Com nosso downloader do YouTube, você pode baixar facilmente qualquer vídeo do YouTube no formato MP4. Basta inserir o URL do vídeo e clicar em Download." />
+  <meta name="keywords" content="YouTube downloader, download YouTube videos, YouTube MP4 downloader" />
+  <link rel="canonical" href="https://www.dataverse-downloader-yt.onrender.com/" />
+  <meta property="og:title" content="DATAVERSE Downloader - Download de Videos Do Youtube no Formato MP4" />
+  <meta property="og:description"
+    content="Com nosso downloader do YouTube, você pode baixar facilmente qualquer vídeo do YouTube no formato MP4. Basta inserir o URL do vídeo e clicar em Download." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.dataverse-downloader-yt.onrender.com/" />
+  <meta property="og:image:alt" content="YouTube Downloader" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="YouTube Downloader - Download YouTube Videos in MP4 Format" />
+  <meta name="twitter:description"
+    content="Com nosso downloader do YouTube, você pode baixar facilmente qualquer vídeo do YouTube no formato MP4. Basta inserir o URL do vídeo e clicar em Download." />
+  <meta name="twitter:image:alt" content="YouTube Downloader" />
+
+  <link rel="icon" type="image/png" href="/favicon/favicon32x32.png" />
+
+  <link rel="icon" type="image/x-icon" href="/favicon/favicon.ico" />
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" />
+  <link id="page-stylesheet" rel="stylesheet" href="/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <% if (matomo) { %>
+    <!-- Matomo -->
+    <script>
+      var _paq = (window._paq = window._paq || []);
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["trackPageView"]);
+      _paq.push(["enableLinkTracking"]);
+      (function () {
+        var u = "<%- matomo.URL %>";
+        if (u.substr(-1) !== "/") {
+          u += "/";
+        }
+        _paq.push(["setTrackerUrl", u + "matomo.php"]);
+        _paq.push(["setSiteId", "<%- matomo.SITE_ID %>"]);
+        var d = document,
+          g = d.createElement("script"),
+          s = d.getElementsByTagName("script")[0];
+        g.async = true;
+        g.src = u + "matomo.js";
+        s.parentNode.insertBefore(g, s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+    <% } %>
+      <% if (gaTrackingId) { %>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<%- gaTrackingId %>"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+            dataLayer.push(arguments);
+          }
+          gtag("js", new Date());
+          gtag("config", "<%- gaTrackingId %>");
+        </script>
+        <% } %>
+</head>
+
+<body lang="en-GB" class="test">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">DATAVERSE
+            <span id="version" class="badge bg-light text-dark">v1.0</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Mais Projetos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <li>
+                            <a class="dropdown-item" href="https://dataverse-stream.rf.gd/server/">DATAVERSE STREAM</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Inicio</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+  <div class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header">
+            <h1 class="card-title text-center">YouTube Downloader</h1>
+          </div>
+          <div class="card-body">
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" pattern="https?://.+" id="video-url"
+                placeholder="Digite a URL do Video" />
+              <select class="form-select" id="quality-options">
+                <option value="highest">Mais Alto</option>
+                <option value="lowest">Mais Baixo</option>
+              </select>
+              <button type="button" class="btn btn-primary" onclick="downloadVideo()">
+                Baixar
+              </button>
+            </div>
+            <p style="color: gray;">Formato da URL: https://www.youtube.com/watch?v=ID_DO_VIDEO // https://youtu.be/ID_DO_VIDEO</p>
+            <div id="download-status"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="card">
+  <h1 class="card-title text-center">Muito obrigada por usar!</h1>
+  <p style="color: white;">Esta Ferramenta é disponibilidada pelo projeto DATAVERSE!</p>
+</div>
+
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    var socket = io();
+
+    // Connect to server
+    socket.on("connect", function () {
+      console.log("Client connected to server.");
+    });
+
+    // Loss of connection to server
+    socket.on("disconnect", function () {
+      console.log("Client disconnected from server.");
+    });
+
+    // Download video
+    function downloadVideo() {
+      const url = document.getElementById("video-url").value;
+      if (!url) return;
+
+      const selectedQuality = document.getElementById("quality-options").value;
+
+      socket.emit("download-video", url, selectedQuality);
+      document.getElementById("download-status").innerHTML = `
+  <div class="card ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
+    <div class="card-body ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
+      <p id="downloading-text" class="card-text ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Baixando...</p>
+      <div class="progress mb-2 ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
+<div id="progress-bar" class="progress-bar bg-red ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}" role="progressbar"
+  style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+</div>
+      <p class="card-text ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Aguarde...Seu Video estará disponível em breve</p>
+    </div>
+  </div>
+      `;
+    }
+
+    // Listen for download error
+    socket.on("download-error", function (data) {
+      const error = data.error;
+      document.getElementById("download-status").innerHTML = `
+      <div class="alert alert-danger ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}" role="alert">
+        ${error}
+      </div>
+    `;
+    });
+
+    // Listen for download progress
+    socket.on("download-progress", function (data) {
+      const progress = data.progress;
+      const progressBar = document.getElementById("progress-bar");
+      progressBar.value = progress;
+      progressBar.innerHTML = progress + "%";
+      progressBar.style.width = progress + "%";
+      progressBar.setAttribute("aria-valuenow", progress);
+    });
+
+    // Listen for download complete
+    socket.on("download-complete", function (data) {
+      const { filename, thumbnail, title, FinishedName } = data;
+      document.getElementById("download-status").innerHTML = `
+      <div id="countdown" class="alert alert-warning" role="alert">
+        Este Video será deletado em: 20:00
+     </div>
+        <div class="card ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
+          <img src="${thumbnail}" class="card-img-top ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}" alt="${title}">
+          <div class="card-body ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">
+            <h5 class="card-title ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">${title}</h5>
+            <p class="card-text ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Download Concluído!</p>
+            <a href="download?url=${FinishedName}" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Baixar (20 min)</a>
+            <a href="player?url=${FinishedName}&title=${title}" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Reproduzir (20 min)</a>
+            <a href="/" class="btn btn-success ${document.body.classList.contains('dark-mode') ? 'dark-mode' : ''}">Baixar outro video!</a>
+          </div>
+        </div>
+      `;
+      // Calculate the end time based on the saved start time and 20 minutes
+      const savedStartTime = localStorage.getItem("videoStartTime");
+      const startTime = savedStartTime ? parseInt(savedStartTime) : new Date().getTime();
+      const endTime = startTime + 20 * 60 * 1000;
+
+      // Update the countdown every second
+      const countdownElement = document.getElementById("countdown");
+
+      function updateCountdown() {
+        const now = new Date().getTime();
+        const timeRemaining = endTime - now;
+        const minutes = Math.floor(timeRemaining / 60000);
+        const seconds = Math.floor((timeRemaining % 60000) / 1000);
+        const formattedTime = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+        countdownElement.textContent = `Este video é armazenado em nossos servidores por apenas 20 minutos!`;
+      }
+
+      updateCountdown();
+      const countdownInterval = setInterval(updateCountdown, 1000);
+
+      // Save the start time to localStorage
+      localStorage.setItem("videoStartTime", startTime.toString());
+
+    });
+
+    // Update progress bar every 100ms
+    var progress = 0;
+    setInterval(function () {
+      progress += Math.random() * 10;
+      if (progress > 100) progress = 100;
+
+      var downloadingText = document.getElementById("downloading-text");
+
+      // If progress-bar doesn't exist, return
+      if (!document.getElementById("progress-bar")) return;
+
+      // document.getElementById("progress-bar").style.width = progress + "%";
+      document
+        .getElementById("progress-bar")
+        .setAttribute("aria-valuenow", progress);
+      if (progress >= 100) {
+        setTimeout(function () {
+          if (!document.getElementById("downloading-text")) return;
+          if (
+            document.getElementById("downloading-text").innerHTML ==
+            "Prossessando..."
+          )
+            return;
+          document.getElementById("downloading-text").innerHTML =
+          "Prossessando...";
+        }, 1000);
+      }
+    }, 100);
+
+
+
+    function toggleDarkMode() {
+      const body = document.body;
+      const darkModeButton = document.getElementById("darkModeToggle");
+
+      // Toggle the dark-mode class on the body element
+      body.classList.toggle('dark-mode');
+
+      // Save the dark mode preference to localStorage
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('darkModePreference', 'dark');
+        darkModeButton.innerHTML = "<i class='fas fa-sun'></i>";
+      } else {
+        localStorage.setItem('darkModePreference', 'light');
+        darkModeButton.innerHTML = "<i class='fas fa-moon'></i>";
+      }
+
+      // Get all elements with class attribute
+      const elementsWithClass = document.querySelectorAll('*[class]');
+
+      // Loop through each element with class and toggle dark-mode
+      elementsWithClass.forEach(element => {
+        if (element !== body) {
+          element.classList.toggle('dark-mode');
+        }
+      });
+    }
+
+    // Check for dark mode preference on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      const darkModePreference = 'dark';
+      const body = document.body;
+      const darkModeButton = document.getElementById("darkModeToggle");
+      const elementsWithClass = document.querySelectorAll('*[class]');
+
+      if (darkModePreference === 'dark') {
+        elementsWithClass.forEach(element => {
+          if (element !== body) {
+            element.classList.toggle('dark-mode');
+          }
+        });
+        body.classList.toggle('dark-mode');
+        darkModeButton.innerHTML = "<i class='fas fa-sun'></i>";
+      }
+
+      if (darkModePreference === 'light') {
+        elementsWithClass.forEach(element => {
+          if (element !== body) {
+            element.classList.toggle('light-mode');
+          }
+        });
+        body.classList.toggle('light-mode');
+        darkModeButton.innerHTML = "<i class='fas fa-moon'></i>";
+      }
+    });
+
+    const customStylesheet = localStorage.getItem('customStylesheet');
+    if (customStylesheet) {
+      const styleTag = document.createElement('style');
+      styleTag.innerHTML = customStylesheet;
+      document.head.appendChild(styleTag);
+      document.getElementById('page-stylesheet').remove();
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>
